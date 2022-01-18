@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
-const Box = styled.div`
-  gap: 8px;
-  display: flex;
-  flex-direction: column;
-`;
+const Box = styled.div``;
 
 const Item = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 3px 0;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #b4bbbf;
+  }
 `;
 
 const Remove = styled.div`
@@ -18,7 +19,7 @@ const Remove = styled.div`
     display: block;
     font-weight: bold;
     font-size: 20px;
-    width: 32px;
+    width: 20px;
     text-align: center;
     cursor: pointer;
   }
