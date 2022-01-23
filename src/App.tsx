@@ -1,22 +1,35 @@
+import { useState } from "react";
 import styled from "styled-components";
-import { QueryParamProvider } from "use-query-params";
-import Spinner from "./Spinner";
+import { ArrayParam, useQueryParam, withDefault } from "use-query-params";
+import Items from "./Items";
 import Box from "./ui/box";
-import { GlobalStyle } from "./ui/globalStyle";
 
 const Title = styled.h1`
   text-align: center;
 `;
 
 const App = () => {
+  const [items, setItems] = useQueryParam("items", withDefault(ArrayParam, []));
+  const [picked, setPicked] = useState<string>();
+
+  const pick = () => {
+    setPicked(items[Math.floor(Math.random() * items.length)] ?? "");
+  };
+
   return (
-    <QueryParamProvider>
-      <GlobalStyle />
-      <Box>
-        <Title>So Spinner!</Title>
-        <Spinner />
-      </Box>
-    </QueryParamProvider>
+    <Box>
+      <Title>So Spinner!</Title>
+
+      <h2>{picked}</h2>
+      <button onClick={pick}>Pick!</button>
+
+      <Items
+        items={items}
+        remove={(item) => {
+          setItems((prev) => prev?.filter((x) => x !== item));
+        }}
+      />
+    </Box>
   );
 };
 
