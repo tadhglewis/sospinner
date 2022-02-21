@@ -8,7 +8,7 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { QueryParamProvider } from "use-query-params";
-import App from "./App";
+import App from "./app";
 import reportWebVitals from "./reportWebVitals";
 import { GlobalStyle } from "./ui/globalStyle";
 import { Location } from "history";

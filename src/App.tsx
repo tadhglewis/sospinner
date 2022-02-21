@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { ArrayParam, useQueryParam, withDefault } from "use-query-params";
+import Add from "./add";
 import Items from "./Items";
 import Box from "./ui/box";
 
@@ -12,23 +13,23 @@ const App = () => {
   const [items, setItems] = useQueryParam("items", withDefault(ArrayParam, []));
   const [picked, setPicked] = useState<string>();
 
-  const pick = () => {
+  const pick = () =>
     setPicked(items[Math.floor(Math.random() * items.length)] ?? "");
-  };
 
   return (
     <Box>
       <Title>So Spinner!</Title>
+
+      <canvas />
 
       <h2>{picked}</h2>
       <button onClick={pick}>Pick!</button>
 
       <Items
         items={items}
-        remove={(item) => {
-          setItems((prev) => prev?.filter((x) => x !== item));
-        }}
+        remove={(item) => setItems((prev) => prev?.filter((x) => x !== item))}
       />
+      <Add onAdd={(item) => setItems(() => [...items, item])} />
     </Box>
   );
 };
